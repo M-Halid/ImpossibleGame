@@ -68,32 +68,27 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 if (time>0){
                 random1 = 50+(int) (Math.random() * ((500) + 1));
-                random2 = -50 + (int) (Math.random() * ((800) + 1));
+                random2 = -150 + (int) (Math.random() * ((800) + 1));
                 score.setText("Time Left: " + time);
                 jess.setVisibility(View.VISIBLE);
                 jess.setY(random1 * 3);
-                jess.setX(random2);
+                jess.setX(random2*2);
                 time--;
 
                 handler.postDelayed(runnable, 300);
-            }else{
-                    handler.removeCallbacks(runnable);
-                    jess.setImageResource(R.drawable.jailed);
-                    score.setText("Your Score is :"+0);
-                    jess.setClickable(false);
-                }
+            }else{clicked(restart);}
             }
         };
         handler.post(runnable);}
 
     public void clicked(View view) {
         handler.removeCallbacks(runnable);
+        jess.setClickable(false);
         jess.setImageResource(R.drawable.jailed);
-        if (userName==""||userName==" "||userName==null) {
-            userName="No Name";
-        }
-           else{userName= intent.getStringExtra("name");}
+        userName= intent.getStringExtra("name");
         score.setText(userName+" Your Score is: \n"+time);
+        jess.setY(550);
+        jess.setX(250);
         restart.setVisibility(View.VISIBLE);}
     public void restart(View view) {
         finish();
